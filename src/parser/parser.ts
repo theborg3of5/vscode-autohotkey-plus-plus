@@ -345,21 +345,21 @@ export class Parser {
         if (line >= 0) {
             const { text } = document.lineAt(line);
 				
-				// GDB TODO
+			// GDB TODO
             if (text.match(/^\s*;---------/)) {
-					let ln = line - 1;
-					let docLine = document.lineAt(ln).text;
-					let headerBlock = "";
-					
-					while (!docLine.match(/^\s*;---------/)) {
-						headerBlock = docLine + "\n" + headerBlock;
-						ln--;
-						docLine = document.lineAt(ln).text;
-					}
-					
-					return ";---------" + "\n" + headerBlock + "\n" + ";---------";
-				}
-				// /GDB TODO
+                let ln = line - 1;
+                let docLine = document.lineAt(ln).text;
+                let headerBlock = "";
+                
+                while (!docLine.match(/^\s*;---------/)) {
+                    headerBlock = docLine + "\n" + headerBlock;
+                    ln--;
+                    docLine = document.lineAt(ln).text;
+                }
+                
+                return headerBlock;
+            }
+            // /GDB TODO
 				
             const markMatch = text.match(/^\s*;(.+)/);
             if (markMatch) {
